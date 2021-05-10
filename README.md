@@ -1,14 +1,14 @@
-# Basic source to markdown generator
+# **scan2md** Basic source to markdown generator
 
-### **scan2md** tool is a very basic source code to markdown generator.
-### The tool scans source file, looks for a special comments and writes
-### commands or text to markdown file.
-### Special comments starts with /*! and ends with */
-### For **Phyton** special comments starts with '''! and ends with '''
-### Doxygen is a very powerfull tool. **scan2md** isn't Doxygen.
-### **scan2md** use similar Doxygen commands for easy handling.
-### The function of commands in **scan2md** can be different as in Doxygen.
-### The code type is determined from input file extension.
+#### **scan2md** tool is a very basic source code to markdown generator.
+#### The tool scans source file, looks for a special comments and writes
+#### commands or text to markdown file.
+#### Special comments starts with /*! and ends with */
+#### For **Phyton** special comments starts with '''! and ends with '''
+#### Doxygen is a very powerfull tool. **scan2md** isn't Doxygen.
+#### **scan2md** use similar Doxygen commands for easy handling.
+#### The function of commands in **scan2md** can be different as in Doxygen.
+#### The code type is determined from input file extension.
 <br>
 
 ## Usage:
@@ -18,16 +18,16 @@ python scan2md <input-file.ext> <output-file.md>
 ```
 ## Commands Usage:
 ---
-- ### Within special comment block, commands starts with @.
-- ### Lines without command outputs direct to markdown file with indent.
-- ### Lines without command and starts with $ writes direct to markdown file.
-- ### You can use any markdown syntax within text (e.g ** to **bold** a text).
-- ### Lines with @@ are substitute to @ and writes as text to md file.
-- ### **scan2md** use indenting in markdown.
-- ### Some commands increase indent of next command (***@class*** for example).
-- ### You can decrease or reset indent with @sa command (see ***@sa***).
-- ### ***@fn*** (Function) has different command handling.
-- ### ***@fn*** The line after comment end are recognized as function declaration.
+- #### Within special comment block, commands starts with @.
+- #### Lines without command outputs direct to markdown file with indent.
+- #### Lines without command and starts with $ writes direct to markdown file.
+- #### You can use any markdown syntax within text (e.g ** to **bold** a text).
+- #### Lines with @@ are substitute to @ and writes as text to md file.
+- #### **scan2md** use indenting in markdown.
+- #### Some commands increase indent of next command (***@class*** for example).
+- #### You can decrease or reset indent with @sa command (see ***@sa***).
+- #### ***@fn*** (Function) has different command handling.
+- #### ***@fn*** The line after comment end are recognized as function declaration.
 
 - ### Example:
 ```c
