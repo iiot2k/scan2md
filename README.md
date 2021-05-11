@@ -31,7 +31,7 @@ python scan2md <input-file.ext> <output-file.md>
 
 - ### Example:
 ```c
-/*! @fn calculate sum
+/*! @fn Calculate sum
     @param op1 operand1      
     @param op2 operand2
     @return sum of op1 and op2      
@@ -43,20 +43,19 @@ int sum(int op1, int op2)
 ```
 ### Markdown Output:
 <br>
-💠Function: calculate sum<br>
+
+### 💠Function: ***sum*** Calculate sum
 
 ```c 
 int sum(int op1, int op2)
 ```
-- ▶️Param:  **op1** operand1<br>
-- ▶️Param:  **op2** operand2<br>
+- ▶️Param:  ***op1*** operand1<br>
+- ▶️Param:  ***op2*** operand2<br>
 - ✅Return: sum of op1 and op2<br>
 
 <br>
 
 ## Commands:
----
-<br>
 
 ## ***@brief*** text
 text<br>
@@ -65,9 +64,10 @@ text<br>
 ---
 
 ## ***@n*** (new line)
+###### <br>
 
-## ***@b*** (break add \<br\>)
-<br>
+## ***@n*** # (new line more space)
+## <br>
 
 ## ***@sa*** \>> (set indent 2)
 >>
@@ -94,7 +94,7 @@ text<br>
 📆 date<br>
 
 ## ***@name*** name description
->##  **name** description<br>
+>##  ***name*** description<br>
 
 ## ***@version*** version 
 ⚙️ version<br>
@@ -143,34 +143,34 @@ def main():
 ```
 
 ## ***@class*** name description
-💎Class: **name** description<br>
+### 💎Class: ***name*** description<br>
 
 ## ***@union*** name description
-🔳Union: **name** description<br>
+### 🔳Union: ***name*** description<br>
 
 ## ***@struct*** name description
-🔲Struct: **name** description<br>
+### 🔲Struct: ***name*** description<br>
 
 ## ***@interface*** name description
-🔑Interface: **name** description<br>
+### 🔑Interface: ***name*** description<br>
 
 ## ***@namespace*** name description
-📇Namespace: **name** description<br>
+📇Namespace: ***name*** description<br>
 
 ## ***@typedef*** name description
-🔨Typedef: **name** description<br>
+🔨Typedef: ***name*** description<br>
 
 ## ***@def*** name description
-🔟Const: **name** description<br>
+🔟Const: ***name*** description<br>
 
 ## ***@enum*** name description
-🔢Enum: **name** description<br>
+🔢Enum: ***name*** description<br>
 
 ## ***@var*** name description
-✳️Variable: **name** description<br>
+✳️Variable: ***name*** description<br>
 
 ## ***@global*** name description
-🌐Global: **name** description<br>
+🌐Global: ***name*** description<br>
 
 ## ***@static*** description
 🌲Static: description
@@ -188,10 +188,10 @@ def main():
 👻Virtual: description
 
 ## ***@fn*** description
-💠Function: description
+### 💠Function: description
 
 ## ***@param*** name description
-- ▶️Param: **name** description<br>
+- ▶️Param: ***name*** description<br>
 
 ## ***@return*** description
 - ✅Return: description

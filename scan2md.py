@@ -82,6 +82,7 @@ class Markdown:
 
     # init storage for function
     def init_function(self):
+        self.func = ""
         self.a_param = []
         self.a_return = []
         self.a_errreturn = []
@@ -112,15 +113,15 @@ class Markdown:
     def write(self, line):
         self.write_nl(line + "<br>")
 
-    # split text and bolds first element
-    def bold_first(self, line):
+    # split text and italic and bolds first element
+    def italic_first(self, line):
         if len(line) == 0:
             return ""
         sline = line.split(" ", 1)
         if len(sline) == 1:
-            return ' **' + sline[0] + '** '
+            return ' ***' + sline[0] + '*** '
         elif len(sline) == 2:
-            return ' **' + sline[0] + '** ' + sline[1] 
+            return ' ***' + sline[0] + '*** ' + sline[1] 
 
     # scan all tags in comment block
     def scan_tags(self, block):
@@ -179,7 +180,7 @@ class Markdown:
 
             # @fn <description>
             elif tag == "fn":
-                self.write(self.indent + u"💠Function: " + tparam)
+                self.func = tparam
                 isfunction = True
 
             # @param <name> <description>
@@ -204,47 +205,47 @@ class Markdown:
 
             # @class <name> <description>
             elif tag == "class":
-                self.write(self.indent + u"💎Class: " + self.bold_first(tparam))
+                self.write_nl(self.indent + u"#### 💎Class: " + self.italic_first(tparam))
                 self.indent += ">"
 
             # @union <name> <description>
             elif tag == "union":
-                self.write(self.indent + u"🔳Union: " + self.bold_first(tparam))
+                self.write_nl(self.indent + u"#### 🔳Union: " + self.italic_first(tparam))
                 self.indent += ">"
 
             # @struct <name> <description>
             elif tag == "struct":
-                self.write(self.indent + u"🔲Struct: " + self.bold_first(tparam))
+                self.write_nl(self.indent + u"#### 🔲Struct: " + self.italic_first(tparam))
                 self.indent += ">"
 
             # @interface <name> <description>
             elif tag == "interface":
-                self.write(self.indent + u"🔑Interface: " + self.bold_first(tparam))
+                self.write_nl(self.indent + u"#### 🔑Interface: " + self.italic_first(tparam))
                 self.indent += ">"
 
             # @namespace <name> <description>
             elif tag == "namespace":
-                self.write(self.indent + u"📇Namespace: " + self.bold_first(tparam))
+                self.write(self.indent + u"📇Namespace: " + self.italic_first(tparam))
 
             # @typedef <name> <description>
             elif tag == "typedef":
-                self.write(self.indent + u"🔨Typedef: " + self.bold_first(tparam))
+                self.write(self.indent + u"🔨Typedef: " + self.italic_first(tparam))
 
             # @def <name> <description>
             elif tag == "def":
-                self.write(self.indent + u"🔟Const: " + self.bold_first(tparam))
+                self.write(self.indent + u"🔟Const: " + self.italic_first(tparam))
 
             # @enum <name> <description>
             elif tag == "enum":
-                self.write(self.indent + u"🔢Enum: " + self.bold_first(tparam))
+                self.write(self.indent + u"🔢Enum: " + self.italic_first(tparam))
 
             # @var <name> <description>
             elif tag == "var":
-                self.write(self.indent + u"✳️Variable: " + self.bold_first(tparam))
+                self.write(self.indent + u"✳️Variable: " + self.italic_first(tparam))
 
             # @global <name> <description>
             elif tag == "global":
-                self.write(self.indent + u"🌐Global: " + self.bold_first(tparam))
+                self.write(self.indent + u"🌐Global: " + self.italic_first(tparam))
 
             # @static <description>
             elif tag == "static":
@@ -270,13 +271,12 @@ class Markdown:
             elif tag == "--":
                 self.write_nl("--- ")
 
-            # @n (new line)
+            # @n [####] (new line)
             elif tag == "n":
-                self.write_nl("")
-
-            # @b (break add <br>)
-            elif tag == "b":
-                self.write("")
+                if tparam == "":
+                    self.write("###### ")
+                else: 
+                    self.write(tparam + "# ")
 
             # @sa [>] (set indent)
             elif tag == "sa":
@@ -323,7 +323,7 @@ class Markdown:
 
             # @name <name> <description>
             elif tag == "name":
-                self.write(">## " + self.bold_first(tparam))
+                self.write_nl(">## " + self.italic_first(tparam))
 
             # @version <version> 
             elif tag == "version":
@@ -380,16 +380,14 @@ class Markdown:
         if code_block == True:
             self.write_nl("```")
 
-        # add new line
-        self.write_nl("")
-
         return isfunction
 
     #write function block
     def write_function(self):
+        
         # write parameters
         for tparam in self.a_param:
-            self.write(self.indent + "- ▶️Param: " + self.bold_first(tparam))
+            self.write(self.indent + "- ▶️Param: " + self.italic_first(tparam))
 
         # write returns
         for tparam in self.a_return:
@@ -402,7 +400,26 @@ class Markdown:
         # write throws
         for tparam in self.a_throw:
             self.write(self.indent + u"- ⛔️Throw: " + tparam)
+        
+        self.write_nl("")
 
+    #scan function block
+    def scan_function(self, line):
+        line = line.strip()
+
+        # look for a function
+        pos_bracket = line.find("(")
+        if pos_bracket != -1:
+            line1 = line[0: pos_bracket]
+            line1 = line1.strip()
+            line1 = line1.split(" ")
+            self.func = line1[len(line1) - 1] + " " + self.func
+            self.write_nl(self.indent + u"#### 💠Function: " + self.italic_first(self.func))
+            self.write_nl("```" + self.def_code + " ")
+            self.write_nl(line)
+            self.write_nl("```")
+            self.write_function()
+    
     # scan file
     def scan_file(self, file_out, sourcefile):
         # open output file 
@@ -434,19 +451,11 @@ class Markdown:
             pos = pos2 + len(self.end_block)
 
             # if a function, next line must be a function declaration
-            if isfunction == True:
-                if pos < len(sourcefile):
-                    pos = skipwhite(sourcefile, pos)
-                    pos2 = findend(sourcefile, pos)
-                    line = sourcefile[pos: pos2]
-                    pos = pos2 + 1
-
-                    # look for a function
-                    if line.find("(") != -1 and line.find(")") != -1:
-                        self.write_nl("```" + self.def_code + " ")
-                        self.write_nl(line)
-                        self.write_nl("```")
-                        self.write_function()
+            if isfunction == True and pos < len(sourcefile):
+                pos = skipwhite(sourcefile, pos)
+                pos2 = findend(sourcefile, pos)
+                self.scan_function(sourcefile[pos: pos2])
+                pos = pos2 + 1
 
         #close file
         self.close()
