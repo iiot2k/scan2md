@@ -42,7 +42,6 @@ int sum(int op1, int op2)
 }
 ```
 ### Markdown Output:
-<br>
 
 ### 💠Function: ***sum*** Calculate sum
 
