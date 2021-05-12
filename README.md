@@ -12,12 +12,10 @@
 <br>
 
 ## Usage:
----
 ```
 python scan2md <input-file.ext> <output-file.md> 
 ```
 ## Commands Usage:
----
 - #### Within special comment block, commands starts with @.
 - #### Lines without command outputs direct to markdown file with indent.
 - #### Lines without command and starts with $ writes direct to markdown file.
@@ -85,6 +83,9 @@ text<br>
 
 ## ***@file*** filename 
 💾 filename<br>
+
+## ***@lib*** name 
+📦 name<br>
 
 ## ***@copyright*** copyright 
 🧾 copyright<br>

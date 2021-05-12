@@ -111,7 +111,7 @@ class Markdown:
 
     # write to markdown file with end <br>
     def write(self, line):
-        self.write_nl(line + "<br>")
+        self.write_nl(line + " <br>")
 
     # split text and italic and bolds first element
     def italic_first(self, line):
@@ -312,6 +312,10 @@ class Markdown:
             # @file <filename> 
             elif tag == "file":
                 self.write(u"💾 " +  tparam)
+
+            # @lib <name> 
+            elif tag == "lib":
+                self.write(u"📦 " +  tparam)
 
             # @copyright <description> 
             elif tag == "copyright":
