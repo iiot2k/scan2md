@@ -311,19 +311,19 @@ class Markdown:
 
             # @file <filename> 
             elif tag == "file":
-                self.write(u"💾 " +  tparam)
+                self.write(u"💾File: **" +  tparam + "**")
 
             # @lib <name> 
             elif tag == "lib":
-                self.write(u"📦 " +  tparam)
+                self.write(u"📦Library: **" +  tparam + "**")
 
             # @copyright <description> 
             elif tag == "copyright":
-                self.write(u"🧾 " +  tparam)
+                self.write(u"🧾 **" +  tparam + "**")
 
             # @date <date> 
             elif tag == "date":
-                self.write(u"📆 " +  tparam)
+                self.write(u"📆Date: **" +  tparam + "**")
 
             # @name <name> <description>
             elif tag == "name":
@@ -331,19 +331,19 @@ class Markdown:
 
             # @version <version> 
             elif tag == "version":
-                self.write(u"⚙️ " + tparam)
+                self.write(u"⚙️Version: **" + tparam + "**")
 
             # @author <name> 
             elif tag == "author":
-                self.write(u"✏️ " + tparam)
+                self.write(u"✏️Author: **" + tparam + "**")
 
             # @todo <todo> 
             elif tag == "todo":
-                self.write(u"❓ ToDo: " + tparam)
+                self.write(u"❓ToDo: **" + tparam + "**")
 
             # @warning <warning> 
             elif tag == "warning":
-                self.write(u"⚠️ " + tparam)
+                self.write(u"⚠️Warning: **" + tparam + "**")
 
             # @emoj <emojename> 
             elif tag == "emoj":
@@ -399,7 +399,7 @@ class Markdown:
 
         # write error returns
         for tparam in self.a_errreturn:
-            self.write(self.indent + u"- ❌Return: "  + tparam)
+            self.write(self.indent + u"- ❌Error Return: "  + tparam)
 
         # write throws
         for tparam in self.a_throw:
