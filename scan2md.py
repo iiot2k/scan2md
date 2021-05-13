@@ -174,12 +174,8 @@ class Markdown:
             #get tagname parameter
             tparam = get_param(line, tag)
 
-            # @brief <text>
+            # @brief <description>
             if tag == "brief":
-                self.write(tparam)
-
-            # @fn <description>
-            elif tag == "fn":
                 self.func = tparam
                 isfunction = True
 

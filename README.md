@@ -24,12 +24,12 @@ python scan2md <input-file.ext> <output-file.md>
 - #### **scan2md** use indenting in markdown.
 - #### Some commands increase indent of next command (***@class*** for example).
 - #### You can decrease or reset indent with @sa command (see ***@sa***).
-- #### ***@fn*** (Function) has different command handling.
-- #### ***@fn*** The line after comment end are recognized as function declaration.
+- #### ***@brief*** (Function) has different command handling.
+- #### ***@brief*** The line after comment end are recognized as function declaration.
 
 - ### Example:
 ```c
-/*! @fn Calculate sum
+/*! @brief Calculate sum
     @param op1 operand1      
     @param op2 operand2
     @return sum of op1 and op2      
@@ -53,9 +53,6 @@ int sum(int op1, int op2)
 <br>
 
 ## Commands:
-
-## ***@brief*** text
-text<br>
 
 ## ***@--*** (horizontal line)
 ---
@@ -187,7 +184,7 @@ def main():
 ## ***@virtual*** description
 👻Virtual: description
 
-## ***@fn*** description
+## ***@brief***  description
 ### 💠Function: description
 
 ## ***@param*** name description
