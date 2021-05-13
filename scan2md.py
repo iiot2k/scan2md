@@ -412,15 +412,17 @@ class Markdown:
         line = line.strip()
 
         # look for a function
-        pos_bracket = line.find("(")
-        if pos_bracket != -1:
-            line1 = line[0: pos_bracket]
+        pos_br_open = line.find("(")
+        pos_br_close = line.find(")")
+
+        if pos_br_open != -1 and pos_br_close != -1:
+            line1 = line[0: pos_br_open]
             line1 = line1.strip()
             line1 = line1.split(" ")
             self.func = line1[len(line1) - 1] + " " + self.func
             self.write_nl(self.indent + u"#### 💠Function: " + self.italic_first(self.func))
             self.write_nl("```" + self.def_code + " ")
-            self.write_nl(line)
+            self.write_nl(line[0: pos_br_close + 1])
             self.write_nl("```")
             self.write_function()
     
