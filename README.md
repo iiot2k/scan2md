@@ -30,6 +30,7 @@ python scan2md <input-file.ext> <output-file.md>
 - ### Example:
 ```c
 /*! @brief Calculate sum
+    @brief Works only with int
     @param op1 operand1      
     @param op2 operand2
     @return sum of op1 and op2      
@@ -42,7 +43,7 @@ int sum(int op1, int op2)
 ### Markdown Output:
 
 ### 💠Function: ***sum*** Calculate sum
-
+### Works only with int
 ```c 
 int sum(int op1, int op2)
 ```

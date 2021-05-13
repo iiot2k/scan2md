@@ -82,7 +82,7 @@ class Markdown:
 
     # init storage for function
     def init_function(self):
-        self.func = ""
+        self.a_brief = []
         self.a_param = []
         self.a_return = []
         self.a_errreturn = []
@@ -176,7 +176,7 @@ class Markdown:
 
             # @brief <description>
             if tag == "brief":
-                self.func = tparam
+                self.a_brief.append(tparam)
                 isfunction = True
 
             # @param <name> <description>
@@ -384,7 +384,7 @@ class Markdown:
 
     #write function block
     def write_function(self):
-        
+
         # write parameters
         for tparam in self.a_param:
             self.write(self.indent + "- ▶️Param: " + self.italic_first(tparam))
@@ -411,12 +411,18 @@ class Markdown:
         pos_br_open = line.find("(")
         pos_br_close = line.find(")")
 
-        if pos_br_open != -1 and pos_br_close != -1:
+        if pos_br_open != -1 and pos_br_close != -1 and len(self.a_brief) > 0:
             line1 = line[0: pos_br_open]
             line1 = line1.strip()
             line1 = line1.split(" ")
-            self.func = line1[len(line1) - 1] + " " + self.func
-            self.write_nl(self.indent + u"#### 💠Function: " + self.italic_first(self.func))
+            #add function name to brief array first element
+            self.a_brief[0] = line1[len(line1) - 1] + " " + self.a_brief[0]
+            self.write_nl(self.indent + u"#### 💠Function: " + self.italic_first(self.a_brief[0]))
+            cnt = 0
+            for tparam in self.a_brief:
+                if cnt > 0:
+                    self.write_nl(self.indent + u"#### " + tparam)
+                cnt += 1
             self.write_nl("```" + self.def_code + " ")
             self.write_nl(line[0: pos_br_close + 1])
             self.write_nl("```")
